@@ -7,3 +7,15 @@ before_install:
 
 script:
   - docker run -e CI=true proldogy/react-docker npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "react-docker"
+  env: "Reactdocker-env"
+  bucket_name: "elasticbeanstalk-us-east-2-405412270503"
+  bucket_path: "react-docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
